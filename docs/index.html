@@ -103,7 +103,6 @@
     </main>
 
     <script>
-        // 1. Tab Switching Logic
         const navButtons = document.querySelectorAll('.nav-btn');
         const tabSections = document.querySelectorAll('.tab-content');
 
@@ -118,7 +117,6 @@
             });
         });
 
-        // 2. Data Fetch & Rendering Logic
         fetch('tracker.json')
             .then(res => res.json())
             .then(data => {
@@ -151,7 +149,6 @@
                 populateTable('body-part-time', 'part_time');
                 populateTable('body-scholarships', 'scholarship');
 
-                // Render Radar & Skills
                 const radarContainer = document.getElementById('container-radar');
                 radarContainer.innerHTML = '';
                 const radarItems = data.upcoming_radar || [];

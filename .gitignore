@@ -1,0 +1,20 @@
+# Private profile and resume data
+data/resume.pdf
+data/profile.json
+
+# Byte-compiled / optimized Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyCharm configuration
+.idea/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# OS-specific clutter
+.DS_Store
+Thumbs.db

@@ -196,3 +196,32 @@ tr:last-child td {
     margin-right: 0.4rem;
     margin-top: 0.4rem;
 }
+
+/* SPA Navigation & Tabs */
+.nav-btn {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-btn.active, .nav-btn:hover {
+    background-color: var(--turquoise-light);
+    color: var(--teal-dark);
+    font-weight: 600;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}

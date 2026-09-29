@@ -1,8 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0; url=internships.html">
-  <title>Opportunity Portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NorthStar | Opportunity Pipeline</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body></body>
+<body>
+    <nav>
+        <div class="brand">
+            <span class="brand-dot"></span>
+            NorthStar
+        </div>
+        <ul class="nav-links">
+            <li><button class="nav-btn active" data-tab="internships">Internships</button></li>
+            <li><button class="nav-btn" data-tab="part-time">Part-Time Jobs</button></li>
+            <li><button class="nav-btn" data-tab="scholarships">Scholarships</button></li>
+            <li><button class="nav-btn" data-tab="radar">Upcoming Radar</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Tab 1: Internships -->
+        <section id="tab-internships" class="tab-content active">
+            <header>
+                <h1>Internship Applications</h1>
+                <p>Active pipeline for cycles through September 2028</p>
+            </header>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Role & Company</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Notes / Next Steps</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-internships">
+                        <tr><td colspan="4">Loading data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Tab 2: Part-Time Jobs -->
+        <section id="tab-part-time" class="tab-content">
+            <header>
+                <h1>Part-Time Applications</h1>
+                <p>Campus roles, student employment, and academic positions</p>
+            </header>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Role & Organization</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Notes / Next Steps</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-part-time">
+                        <tr><td colspan="4">Loading data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Tab 3: Scholarships -->
+        <section id="tab-scholarships" class="tab-content">
+            <header>
+                <h1>Scholarships & Grants</h1>
+                <p>Merit grants, leadership awards, and academic funding</p>
+            </header>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Award & Foundation</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Notes / Next Steps</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-scholarships">
+                        <tr><td colspan="4">Loading data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Tab 4: Upcoming Radar & Skills -->
+        <section id="tab-radar" class="tab-content">
+            <header>
+                <h1>Upcoming Radar & Skills Roadmap</h1>
+                <p>Cycles opening ahead and technical proficiencies to target</p>
+            </header>
+            <div class="cards-grid" id="container-radar">
+                <p>Loading radar opportunities...</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 1. Tab Switching Logic
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const tabSections = document.querySelectorAll('.tab-content');
+
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                navButtons.forEach(b => b.classList.remove('active'));
+                tabSections.forEach(s => s.classList.remove('active'));
+
+                btn.classList.add('active');
+                const targetTab = btn.getAttribute('data-tab');
+                document.getElementById(`tab-${targetTab}`).classList.add('active');
+            });
+        });
+
+        // 2. Data Fetch & Rendering Logic
+        fetch('tracker.json')
+            .then(res => res.json())
+            .then(data => {
+                const items = data.items || [];
+
+                function populateTable(tbodyId, category) {
+                    const tbody = document.getElementById(tbodyId);
+                    tbody.innerHTML = '';
+                    const matched = items.filter(item => item.category === category);
+
+                    if (matched.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4">No entries recorded in this category.</td></tr>';
+                        return;
+                    }
+
+                    matched.forEach(item => {
+                        const row = document.createElement('tr');
+                        const statusClass = `badge-${(item.status || 'applied').toLowerCase()}`;
+                        row.innerHTML = `
+                            <td><strong>${item.title}</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">${item.company}</span></td>
+                            <td>${item.deadline || '—'}</td>
+                            <td><span class="badge ${statusClass}">${item.status}</span></td>
+                            <td>${item.notes || '—'}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                }
+
+                populateTable('body-internships', 'internship');
+                populateTable('body-part-time', 'part_time');
+                populateTable('body-scholarships', 'scholarship');
+
+                // Render Radar & Skills
+                const radarContainer = document.getElementById('container-radar');
+                radarContainer.innerHTML = '';
+                const radarItems = data.upcoming_radar || [];
+
+                if (radarItems.length === 0) {
+                    radarContainer.innerHTML = '<p>No upcoming opportunities queued.</p>';
+                    return;
+                }
+
+                radarItems.forEach(opp => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    const tags = (opp.target_skills || []).map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+                    card.innerHTML = `
+                        <h3>${opp.title}</h3>
+                        <div class="meta">Expected Window: <strong>${opp.open_date}</strong> • Type: ${opp.type}</div>
+                        <div style="margin-top: 0.75rem;">
+                            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Target Skills:</div>
+                            ${tags}
+                        </div>
+                    `;
+                    radarContainer.appendChild(card);
+                });
+            })
+            .catch(err => {
+                console.error("Failed to load tracker.json:", err);
+            });
+    </script>
+</body>
 </html>

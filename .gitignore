@@ -18,3 +18,11 @@ env/
 # OS-specific clutter
 .DS_Store
 Thumbs.db
+
+.env
+data/resume.pdf
+data/resume.txt
+data/profile.json
+.idea/
+venv/
+__pycache__/

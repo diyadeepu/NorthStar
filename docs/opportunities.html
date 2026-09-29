@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upcoming Radar & Skill Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="brand">
+            <span class="brand-dot"></span>
+            Opportunity Agent
+        </div>
+        <ul class="nav-links">
+            <li><a href="internships.html">Internships</a></li>
+            <li><a href="part-time.html">Part-Time Jobs</a></li>
+            <li><a href="scholarships.html">Scholarships</a></li>
+            <li><a href="opportunities.html" class="active">Upcoming Radar</a></li>
+        </ul>
+    </nav>
+    <main>
+        <header>
+            <h1>Upcoming Radar & Skills Roadmap</h1>
+            <p>Roles opening in future cycles and competencies to sharpen</p>
+        </header>
+
+        <div class="cards-grid" id="radar-container"></div>
+    </main>
+
+    <script>
+        fetch('tracker.json')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('radar-container');
+                container.innerHTML = '';
+                (data.upcoming_radar || []).forEach(opp => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    const tags = opp.target_skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+                    card.innerHTML = `
+                        <h3>${opp.title}</h3>
+                        <div class="meta">Expected Window: <strong>${opp.open_date}</strong> • Type: ${opp.type}</div>
+                        <div style="margin-top: 0.75rem;">
+                            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Recommended Skills:</div>
+                            ${tags}
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            });
+    </script>
+</body>
+</html>

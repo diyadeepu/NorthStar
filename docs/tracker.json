@@ -1,0 +1,135 @@
+{
+  "profile": {
+    "full_name": "Diya Deepu",
+    "is_us_citizen": true,
+    "age": 19,
+    "major": "Computer Science",
+    "minor": "Business",
+    "expected_graduation": "2028-06",
+    "target_window_end": "2028-09-30",
+    "keywords": [
+      "python",
+      "ai",
+      "product management",
+      "software engineer",
+      "data"
+    ],
+    "resume_skills": [
+      "python",
+      "java",
+      "c++",
+      "javascript",
+      "react",
+      "node",
+      "sql",
+      "git",
+      "ai",
+      "gis"
+    ]
+  },
+  "items": [
+    {
+      "id": "INT-001",
+      "category": "internship",
+      "title": "Software Engineering Intern - Summer 2027",
+      "company": "Tech Innovations Corp",
+      "deadline": "2026-11-15",
+      "min_age": 18,
+      "requires_us_citizenship": true,
+      "eligible_majors": [
+        "Computer Science",
+        "Electrical Engineering"
+      ],
+      "required_skills": [
+        "python",
+        "git"
+      ],
+      "status": "Applied",
+      "notes": "First-round technical assessment sent",
+      "matched_skills": [
+        "python",
+        "git"
+      ]
+    },
+    {
+      "id": "INT-002",
+      "category": "internship",
+      "title": "AI Product Management Intern",
+      "company": "NextGen Systems",
+      "deadline": "2027-01-10",
+      "min_age": 18,
+      "requires_us_citizenship": false,
+      "eligible_majors": [
+        "Computer Science",
+        "Business"
+      ],
+      "required_skills": [
+        "product management",
+        "ai"
+      ],
+      "status": "Accepted",
+      "notes": "Offer letter received",
+      "matched_skills": [
+        "ai"
+      ]
+    },
+    {
+      "id": "PT-101",
+      "category": "part_time",
+      "title": "Campus AI Academic Mentor",
+      "company": "University Learning Center",
+      "deadline": "2026-10-01",
+      "min_age": 18,
+      "requires_us_citizenship": false,
+      "eligible_majors": [
+        "Computer Science"
+      ],
+      "required_skills": [
+        "python"
+      ],
+      "status": "Applied",
+      "notes": "Interview scheduled",
+      "matched_skills": [
+        "python"
+      ]
+    },
+    {
+      "id": "SCH-201",
+      "category": "scholarship",
+      "title": "Undergraduate Women in STEM Leadership Grant",
+      "company": "Pacific Tech Foundation",
+      "deadline": "2027-03-01",
+      "min_age": 18,
+      "requires_us_citizenship": true,
+      "eligible_majors": [
+        "Computer Science"
+      ],
+      "required_skills": [],
+      "status": "Rejected",
+      "notes": "Competitive pool, re-apply in 2027",
+      "matched_skills": []
+    }
+  ],
+  "upcoming_radar": [
+    {
+      "title": "Machine Learning Engineer Internship (Summer 2028)",
+      "type": "Internship",
+      "open_date": "August 2027",
+      "target_skills": [
+        "PyTorch",
+        "Distributed Systems",
+        "SQL"
+      ]
+    },
+    {
+      "title": "Technical Product Manager Apprentice",
+      "type": "Part-Time",
+      "open_date": "January 2027",
+      "target_skills": [
+        "Product Roadmapping",
+        "A/B Testing",
+        "System Architecture"
+      ]
+    }
+  ]
+}

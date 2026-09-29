@@ -2,33 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Internships - AI Application Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NorthStar | Scholarships & Grants</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
         <div class="brand">
             <span class="brand-dot"></span>
-            Opportunity Agent
+            NorthStar
         </div>
         <ul class="nav-links">
-            <li><a href="internships.html" class="active">Internships</a></li>
+            <li><a href="internships.html">Internships</a></li>
             <li><a href="part-time.html">Part-Time Jobs</a></li>
-            <li><a href="scholarships.html">Scholarships</a></li>
+            <li><a href="scholarships.html" class="active">Scholarships</a></li>
             <li><a href="opportunities.html">Upcoming Radar</a></li>
         </ul>
     </nav>
     <main>
         <header>
-            <h1>Internship Applications</h1>
-            <p>Active pipeline for cycles leading through September 2028</p>
+            <h1>Scholarships & Grants</h1>
+            <p>Academic awards, merit programs, and leadership funding</p>
         </header>
 
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>Role & Company</th>
+                        <th>Award & Foundation</th>
                         <th>Deadline</th>
                         <th>Status</th>
                         <th>Notes / Next Steps</th>
@@ -47,10 +48,10 @@
             .then(data => {
                 const tbody = document.getElementById('table-body');
                 tbody.innerHTML = '';
-                const items = data.items.filter(item => item.category === 'internship');
+                const items = (data.items || []).filter(item => item.category === 'scholarship');
 
                 if (items.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4">No applications submitted yet.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="4">No scholarship applications tracked yet.</td></tr>';
                     return;
                 }
 
@@ -65,6 +66,9 @@
                     `;
                     tbody.appendChild(row);
                 });
+            })
+            .catch(err => {
+                document.getElementById('table-body').innerHTML = '<tr><td colspan="4">Error loading tracker data. Run main.py to generate tracker.json.</td></tr>';
             });
     </script>
 </body>
